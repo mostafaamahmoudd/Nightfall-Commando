@@ -12,10 +12,6 @@ public class EnemyAI : MonoBehaviour
     private Vector3 destination;
 
     [SerializeField] private Transform target;
-
-    //private bool isWalking = false;
-    public float idleTime = 3f;
-
     private void Start()
     {
         GetReferences();
@@ -30,24 +26,6 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(target.position);
         animator.SetBool("isWalking", true);
-
-        //if (Vector3.Distance(transform.position, destination) < 0.5f)
-        //{
-        //    if (isWalking)
-        //    {
-        //        isWalking = false;
-                
-        //        Invoke("SetNewDestination", idleTime);
-        //    }
-        //}
-        //else
-        //{
-        //    if (!isWalking)
-        //    {
-        //        isWalking = true;
-        //        animator.SetBool("isWalking", true);
-        //    }
-        //}
     }
 
     private void RotateToTarget()
