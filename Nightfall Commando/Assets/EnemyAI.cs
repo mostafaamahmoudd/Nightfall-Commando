@@ -8,8 +8,7 @@ public class EnemyAI : MonoBehaviour
 {
     private NavMeshAgent agent = null;
     private Animator animator;
-
-    private Vector3 destination;
+    private Enemy enemy;
 
     [SerializeField] private Transform target;
     private void Start()
@@ -19,13 +18,25 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        MoveToTarget();
+        float destination = Vector3.Distance(target.position, animator.transform.position);
+
+        if (enemy.Health > 0f)
+        {
+            if (destination <= 2.5f)
+            {
+                animator.SetBool("isAttacking", true);
+            }
+            else
+            {
+                animator.SetBool("isAttacking", false);
+                MoveToTarget();
+            }
+        }
     }
 
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
-        animator.SetBool("isWalking", true);
     }
 
     private void RotateToTarget()
@@ -42,6 +53,5 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        destination = agent.destination;
     }
 }

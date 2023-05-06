@@ -2,7 +2,14 @@
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float Health = 50f;
+    public float Health = 100f;
+
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void TakeDamage (float amount)
     {
@@ -11,10 +18,16 @@ public class Enemy : MonoBehaviour
         {
             Die ();
         }
+        else
+        {
+            animator.SetTrigger("Damage");
+        }
     }
 
     private void Die ()
     {
-        Destroy (gameObject);
+        animator.SetTrigger("Die");
+        GetComponent<Collider>().enabled = false;
+        Destroy(gameObject, 8f);
     }
 }
