@@ -20,18 +20,17 @@ public class EnemyAI : MonoBehaviour
     {
         float destination = Vector3.Distance(target.position, animator.transform.position);
 
-        if (enemy.Health > 0f)
+       
+        if (destination <= 2.5f)
         {
-            if (destination <= 2.5f)
-            {
-                animator.SetBool("isAttacking", true);
-            }
-            else
-            {
-                animator.SetBool("isAttacking", false);
-                MoveToTarget();
-            }
+            animator.SetBool("isAttacking", true);
         }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+            MoveToTarget();
+        }
+        
     }
 
     private void MoveToTarget()
